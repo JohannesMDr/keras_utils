@@ -43,7 +43,7 @@ class LossHistory(Callback):
 
 
 # ref: https://qiita.com/shoji9x9/items/896204303a7a56321d4c
-from tensorflow.keras.callbacks import Callback
+from keras.callbacks import Callback
 from hyperdash import Experiment
 
 class Hyperdash(Callback):
