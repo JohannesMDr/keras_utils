@@ -40,3 +40,23 @@ class LossHistory(Callback):
 		plt.pause(0.1)
 
 # cb_my = loss_history.LossHistory()
+
+
+# ref: https://qiita.com/shoji9x9/items/896204303a7a56321d4c
+from tensorflow.keras.callbacks import Callback
+from hyperdash import Experiment
+
+class Hyperdash(Callback):
+    def __init__(self, entries, exp):
+        super(Hyperdash, self).__init__()
+        self.entries = entries
+        self.exp = exp
+
+    def on_epoch_end(self, epoch, logs=None):
+        for entry in self.entries:
+            log = logs.get(entry)            
+            if log is not None:
+                self.exp.metric(entry, log)
+
+exp = Experiment("unet3-1")
+hd_callback = Hyperdash(["val_loss", "loss", "val_accuracy", "accuracy"], exp)
