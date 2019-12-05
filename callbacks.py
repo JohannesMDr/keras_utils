@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 from keras.callbacks import ModelCheckpoint, Callback
 
 model_checkpoint = ModelCheckpoint(
-					filepath=os.path.join(path_model, 'unet3-1_{epoch:02d}.h5'),
-					period=1,
-					save_weights_only=True)
+	filepath=os.path.join(path_model, 'unet3-1_{epoch:02d}.h5'),
+	period=1,
+	save_weights_only=True)
 					
 					
 # ref: https://qiita.com/typecprint/items/3ef54ce47e32e286d092
@@ -23,7 +23,7 @@ class LossHistory(Callback):
 		self.val_acc.append(logs['val_acc'])
 		self.train_loss.append(logs['loss'])
 		self.val_loss.append(logs['val_loss'])
-		
+
 		# 保存
 		np.save('history.npy', np.array([self.train_acc, self.val_acc, self.train_loss, self.val_loss]))
 
@@ -39,7 +39,7 @@ class LossHistory(Callback):
 		plt.savefig('history.png')
 		plt.pause(0.1)
 
-# cb_my = loss_history.LossHistory()
+# cb_my = LossHistory()
 
 
 # ref: https://qiita.com/shoji9x9/items/896204303a7a56321d4c
